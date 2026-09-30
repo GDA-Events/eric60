@@ -20,6 +20,9 @@
   @media(max-width:900px){.invitation-body{gap:5vw;grid-template-columns:1.05fr 1fr}.cover-title{font-size:76px}.entry{padding-left:27px}.dedication .sixty{font-size:80px}}
   @media(max-width:650px){.masthead{padding-top:21px;padding-bottom:21px}.logo{width:147px}.masthead>span{font-size:8px;letter-spacing:.1em;max-width:85px;text-align:right;line-height:1.8}.invitation-body{grid-template-columns:1fr;padding-top:45px;padding-bottom:28px;gap:38px}.eyebrow{font-size:10px;margin-bottom:19px}.cover-title{font-size:67px}.cover-title span:nth-child(2){display:inline}.cover-title em{font-size:.8em}.dedication{margin-top:24px;gap:19px}.dedication .sixty{font-size:65px}.dedication span:last-child{font-size:10px}.entry{border-left:0;border-top:1px solid var(--line);padding:30px 0 0;max-width:none}.entry h2{font-size:34px;margin-bottom:12px}.entry>p{font-size:13px;margin-bottom:25px}.submit{margin-top:21px}.form-status{margin-bottom:0;min-height:30px}.invitation-footer{font-size:8px;letter-spacing:.06em;padding:19px 0}.lock-again{bottom:12px;right:12px;font-size:10px;padding:11px 13px}}
   @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  .print-sheet{position:fixed;inset:0;z-index:10;overflow:auto;background:var(--paper);color:var(--ink);padding:28px max(24px,calc((100vw - 900px)/2)) 70px}.print-toolbar{display:flex;justify-content:space-between;gap:16px;max-width:900px;margin:0 auto 28px;padding-bottom:20px;border-bottom:1px solid #ccc8bb}.print-toolbar button{border:1px solid #777b6a;background:transparent;color:var(--ink);padding:12px 18px;font-size:12px;min-height:44px}.print-toolbar button:first-child{background:var(--ink);color:var(--paper)}.print-content{max-width:900px;margin:0 auto}.print-brand{font-size:10px;letter-spacing:.17em;color:#666a5c;margin:0 0 28px}.print-content h1{font:440 64px/1 Bodoni,Georgia,serif;letter-spacing:-.05em;margin:0 0 14px}.print-meta{font-size:12px;letter-spacing:.04em;color:#555e54;margin:0 0 10px}.print-coverage{font-size:14px;line-height:1.7;padding-bottom:23px;border-bottom:1px solid #a6ad9e}.print-section{padding:21px 0;border-bottom:1px solid #ccc8bb;break-inside:avoid}.print-chapter{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#666a5c;margin:0 0 9px}.print-section h2{font:440 31px/1.15 Bodoni,Georgia,serif;margin:0 0 13px}.print-part{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 22px;margin:12px 0;font-size:12px;line-height:1.6}.print-part strong{font-weight:600;white-space:nowrap}.print-part small{grid-column:1/-1;color:#60685b;font-size:10px}.print-subtotal{font-size:12px;font-weight:600;margin:14px 0 7px}.print-note{font-size:10px;line-height:1.75;color:#596052;margin:6px 0}.print-totals{margin:28px 0 20px;border-top:1px solid #889080;padding-top:13px;break-inside:avoid}.print-totals .print-part{padding:8px 0;border-bottom:1px solid #ccc8bb}.print-total-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:22px 0 6px;color:#5e6858}.print-total-value{font:440 49px/1.2 Bodoni,Georgia,serif;letter-spacing:-.04em;margin:0}.print-content h3{font:440 24px/1.3 Bodoni,Georgia,serif;margin:22px 0 9px}.print-content .print-footer{margin-top:25px;border-top:1px solid #a6ad9e;padding-top:15px}.print-error{font-size:12px;line-height:1.7;color:#794d30;margin:0 0 20px}
+  @media(max-width:650px){.print-sheet{padding:20px 22px 45px}.print-toolbar{gap:10px}.print-toolbar button{font-size:11px;padding:10px 12px}.print-content h1{font-size:50px}.print-part{gap:3px 12px}.print-total-value{font-size:41px}}
+  @media print{@page{margin:18mm 16mm}html,body,body.unlocked{height:auto!important;min-height:0!important;overflow:visible!important;background:white!important;color:#181917!important}body.printing-summary> :not(#print-sheet){display:none!important}body.printing-summary #print-sheet{display:block!important;position:static;inset:auto;overflow:visible;height:auto;padding:0;background:white;color:#181917}body.printing-summary .print-toolbar,body.printing-summary .print-error{display:none!important}.print-content{max-width:none}.print-content h1{font-size:44px}.print-brand{margin-bottom:18px}.print-section{padding:15px 0}.print-section h2{font-size:25px}.print-total-value{font-size:39px}.print-note{color:#444}.print-content h3{break-after:avoid}}
   </style>
 </head>
 <body>
@@ -32,8 +35,9 @@
     <footer class="invitation-footer"><span>GDA EVENT STUDIO<br>MILANO / NAPOLI / CAPRI</span><span>CURATED WITH CARE<br>EXCLUSIVELY FOR YOU</span></footer>
     <noscript><p class="no-script">Please enable JavaScript to open your private invitation.</p></noscript>
   </main>
-  <iframe class="presentation-frame" id="presentation" title="Eric’s private celebration proposals" sandbox="allow-scripts allow-modals" hidden></iframe>
+  <iframe class="presentation-frame" id="presentation" title="Eric’s private celebration proposals" sandbox="allow-scripts allow-modals allow-popups" hidden></iframe>
   <button class="lock-again" id="lock-again" type="button" hidden>Close invitation</button>
+  <section class="print-sheet" id="print-sheet" role="dialog" aria-modal="true" aria-labelledby="print-title" hidden><div class="print-toolbar"><button id="print-summary-now" type="button">Print / Save as PDF</button><button id="close-print-summary" type="button">Back to proposal</button></div><p class="print-error" id="print-error" role="status"></p><div class="print-content" id="print-content"></div></section>
   <script>
   'use strict';
   (()=>{
@@ -45,7 +49,81 @@
     const invitation=document.querySelector('#invitation');
     const frame=document.querySelector('#presentation');
     const lock=document.querySelector('#lock-again');
+    const printSheet=document.querySelector('#print-sheet');
+    const printContent=document.querySelector('#print-content');
+    const printButton=document.querySelector('#print-summary-now');
+    const printError=document.querySelector('#print-error');
     let busy=false;
+    const printNode=(tag,className,value)=>{
+      const element=document.createElement(tag);
+      if(className)element.className=className;
+      if(value!==undefined)element.textContent=value;
+      return element;
+    };
+    function validPrintSummary(data){
+      const text=value=>typeof value==='string'&&value.length<=4000;
+      const list=(value,maximum,check)=>Array.isArray(value)&&value.length<=maximum&&value.every(check);
+      try{if(JSON.stringify(data).length>80000)return false;}catch(_){return false;}
+      return data&&data.type==='gda:print-estimate'&&data.version===1&&
+        ['title','subtitle','coverage','feeBasis','totalLabel','total','feeScope','terms','nextStep'].every(key=>text(data[key]))&&
+        list(data.sections,13,section=>section&&['chapter','name','subtotal'].every(key=>text(section[key]))&&
+          list(section.parts,25,part=>part&&['name','price','detail'].every(key=>text(part[key])))&&list(section.notes,15,text))&&
+        data.sections.length>0&&list(data.totals,5,row=>row&&text(row.label)&&text(row.value))&&list(data.confirmations,40,text);
+    }
+    function clearPrintSummary(notifyFrame=true){
+      const wasOpen=!printSheet.hidden;
+      printSheet.hidden=true;printContent.replaceChildren();printError.textContent='';
+      document.body.classList.remove('printing-summary');frame.inert=false;lock.inert=false;
+      if(wasOpen&&notifyFrame&&!frame.hidden){
+        frame.contentWindow.postMessage({type:'gda:print-closed'},'*');
+        frame.focus();
+      }
+    }
+    function printPreparedSummary(){
+      if(printSheet.hidden)return;
+      printError.textContent='';
+      document.body.classList.add('printing-summary');
+      try{window.print();}
+      catch(_){
+        document.body.classList.remove('printing-summary');
+        printError.textContent='Printing is unavailable in this browser. Return to the proposal and use Copy summary.';
+      }
+    }
+    function renderPrintSummary(data){
+      const content=document.createDocumentFragment();
+      content.append(printNode('p','print-brand','GDA EVENT STUDIO / YOUR SELECTED PROPOSAL'));
+      const heading=printNode('h1','',data.title);heading.id='print-title';content.append(heading);
+      content.append(printNode('p','print-meta',data.subtitle),printNode('p','print-coverage',data.coverage));
+      data.sections.forEach(section=>{
+        const item=printNode('section','print-section');
+        item.append(printNode('p','print-chapter',section.chapter),printNode('h2','',section.name));
+        section.parts.forEach(part=>{
+          const row=printNode('div','print-part');
+          row.append(printNode('span','',part.name),printNode('strong','',part.price),printNode('small','',part.detail));item.append(row);
+        });
+        item.append(printNode('p','print-subtotal',`Known supplier subtotal: ${section.subtotal}`));
+        section.notes.forEach(note=>item.append(printNode('p','print-note',note)));content.append(item);
+      });
+      const totals=printNode('section','print-totals');
+      data.totals.forEach(total=>{const row=printNode('div','print-part');row.append(printNode('span','',total.label),printNode('strong','',total.value));totals.append(row);});
+      totals.append(printNode('p','print-note',data.feeBasis),printNode('p','print-total-label',data.totalLabel),printNode('p','print-total-value',data.total));content.append(totals);
+      content.append(printNode('h3','','Planning notes & confirmations'));
+      data.confirmations.forEach(note=>content.append(printNode('p','print-note',note)));
+      content.append(printNode('h3','','What the GDA fee covers'),printNode('p','print-note',data.feeScope));
+      const footer=printNode('footer','print-footer');footer.append(printNode('p','print-note',data.terms),printNode('p','print-note',data.nextStep));content.append(footer);
+      printContent.replaceChildren(content);printError.textContent='';printSheet.hidden=false;printSheet.scrollTop=0;
+      frame.inert=true;lock.inert=true;printButton.focus();
+    }
+    window.addEventListener('message',event=>{
+      // The encrypted frame has an opaque origin: verify its WindowProxy,
+      // unlocked state and the typed payload. Never accept or inject HTML.
+      if(event.source!==frame.contentWindow||frame.hidden||!document.body.classList.contains('unlocked')||!validPrintSummary(event.data))return;
+      renderPrintSummary(event.data);
+    });
+    printButton.addEventListener('click',printPreparedSummary);
+    document.querySelector('#close-print-summary').addEventListener('click',()=>clearPrintSummary());
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!printSheet.hidden){event.preventDefault();clearPrintSummary();}});
+    window.addEventListener('afterprint',()=>clearPrintSummary());
     show.addEventListener('click',()=>{
       const visible=input.type==='password';
       input.type=visible?'text':'password';show.textContent=visible?'Hide':'Show';
@@ -61,7 +139,7 @@
       input.removeAttribute('aria-invalid');status.textContent='Opening your invitation…';
       let stage='download';
       try{
-        const response=await fetch('proposal.bin?v=67f3f556346e2be8',{cache:'no-store',credentials:'omit'});
+        const response=await fetch('proposal.bin?v=21c1834a3231d1b5',{cache:'no-store',credentials:'omit'});
         if(!response.ok)throw new Error('Download failed');
         const envelope=new Uint8Array(await response.arrayBuffer());
         if(new TextDecoder().decode(envelope.slice(0,8))!=='GDAEVT01')throw new Error('Invalid package');
@@ -101,6 +179,7 @@
       }finally{busy=false;submit.disabled=false;show.disabled=false;}
     });
     lock.addEventListener('click',()=>{
+      clearPrintSummary(false);
       frame.onload=null;frame.onerror=null;frame.removeAttribute('srcdoc');frame.hidden=true;lock.hidden=true;
       invitation.hidden=false;document.body.classList.remove('unlocked');input.value='';status.textContent='';input.focus();
     });
